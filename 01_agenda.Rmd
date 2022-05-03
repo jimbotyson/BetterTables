@@ -1,0 +1,10 @@
+# Agenda and goals
+
+I want to give you some idea of the variety of packages that exist to improve your experience and results creating tables using R.
+
+I will quickly review some popular packages; give brief examples from ***xtable***, ***kable*** and ***kableExtra***, and then move on to describe ***gt*** in more detail, with a glance sideways and ***gtExtras***.
+
+I don't think you will learn all about using the gt() package in this session but that you will be motivated to learn more about it.
+
+Unfortunately, no package really does everything and rather annoyingly doing some things (captions and cross-references) can require some ugly hacking to get the result you want. Sometimes you will have to choose between bad and worse outcomes.
+

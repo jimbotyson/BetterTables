@@ -1,0 +1,13 @@
+---
+title: "Better Tables in R"
+site: bookdown::bookdown_site
+github-repo: jimbotyson/BetterTables
+output:
+  bookdown::gitbook
+---
+
+# Introduction
+
+There are \*\* sections to the tutorial, but each is quite short. There are few lengthy explanations. If you are not using this material in combination with a class, you will sometimes need to google for an explanation.
+
+*Last Updated: `r format(Sys.time(), "%b %d, %Y %l:%M %p")`*

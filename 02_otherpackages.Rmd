@@ -1,0 +1,26 @@
+# References
+
+<https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/>
+
+# Different table packages compared
+
+There are many other R packages that can be used to generate tables.
+
+[**flextable**](https://davidgohel.github.io/flextable/) ([Gohel 2021a](#ref-R-flextable)) and [**huxtable**](https://hughjonesd.github.io/huxtable/) ([Hugh-Jones 2021](#ref-R-huxtable)): support the widest range of output formats: HTML, LaTeX, and Office formats. They allow common table features (e.g., conditional formatting).
+
+[**gt**](https://jthomasmock.github.io/gtExtras/) ([Iannone, Cheng, and Schloerke 2022](#ref-R-gt)): Allows you to compose a table by putting together different parts of the table, such as the table header (title and subtitle), the column labels, the table body, row group labels, and the table footer. Some parts are optional. You can also format numbers and add background shading to cells. Currently **gt** mainly supports HTML output.[15](references.html#fn15) You can find more information about it at <https://gt.rstudio.com>.
+
+[**formattable**](https://renkun-ken.github.io/formattable/) ([Ren and Russell 2021](#ref-R-formattable)): Will format numbers, and style table columns. The package supports the HTML most fully.
+
+[**DT**](https://rstudio.github.io/DT/) ([Xie, Cheng, and Tan 2021](#ref-R-DT)): Excellent for creating attractive, interactive HTML tables: <https://github.com/rstudio/DT>.
+
+[**reactable**](https://glin.github.io/reactable/index.html) ([Lin 2020](#ref-R-reactable)): Similar to **DT**, so you may read its documentation and see which one suits you better: <https://glin.github.io/reactable/>.
+
+[**rhandsontable**](https://jrowen.github.io/rhandsontable/) ([Owen 2021](#ref-R-rhandsontable)): Also similar to **DT**, and has an Excel feel (e.g., you can edit data directly in the table). Visit <https://jrowen.github.io/rhandsontable/> to learn more about it.
+
+[**pixiedust**](https://github.com/nutterb/pixiedust) or [**pixiedust web**](https://www.suchanutter.net/pixiedust/index.html) ([Nutter 2021](#ref-R-pixiedust)): Features creating tables for models (such as linear models) converted through the **broom** package ([Robinson, Hayes, and Couch 2022](#ref-R-broom)). It supports Markdown, HTML, and LaTeX output formats. Its repository is at <https://github.com/nutterb/pixiedust>.
+
+[**stargazer**](https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf) ([Hlavac 2018](#ref-R-stargazer)): Features formatting regression models and summary statistics tables. The package is available on CRAN at <https://cran.r-project.org/package=stargazer>.
+
+[**xtable**](https://cran.r-project.org/package=xtable) ([Dahl et al. 2019](#ref-R-xtable)): Perhaps the oldest package for creating tables---the first release was made in 2000. It supports both LaTeX and HTML formats.
+

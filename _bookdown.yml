@@ -1,0 +1,9 @@
+delete_merged_file: true
+book_filename: BetterTables.Rmd
+
+rmd_files:
+ - index.Rmd
+ - 01_agenda.Rmd
+ - 02_otherpackages.Rmd
+ - 03_firstgtexample.Rmd
+ - 04_elaboration.Rmd

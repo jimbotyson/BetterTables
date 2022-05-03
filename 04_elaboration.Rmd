@@ -1,0 +1,194 @@
+# The parts of a table in gt()
+
+![The parts of a table from https://gt.rstudio.com/articles/intro-creating-gt-tables.html](images/gt_parts_of_a_table.png "Shows how gt() refers to the layout of a")
+
+# Adding titles
+
+```{r}
+# add titles
+
+gt_tbl <- 
+  gt_tbl %>%
+  tab_header(
+    title = "Student Examination Scores",
+    subtitle = "Maths, English, History and Average"
+  )
+```
+
+# Format the title and the body cells
+
+```{r}
+gt_tbl <- 
+  gt_tbl %>% 
+   tab_style(
+    style = list(
+      cell_fill(color = "lightcyan"),
+      cell_text(weight = "bold",style="italic"),
+      cell_borders(
+        sides = c("left", "right"),
+        color = "red",
+        weight = px(1.5),
+        style = "solid"
+      )),
+      locations=cells_body(everything())
+    )
+     
+gt_tbl
+```
+
+# Add a note
+
+```{r}
+gt_tbl <- 
+  gt_tbl %>%
+  tab_source_note(
+    source_note = md("Data from *A Quick Introduction to SPSS, ISD, UCL*")
+  )
+gt_tbl
+```
+
+# Add a footnote
+
+```{r}
+gt_tbl <- 
+  gt_tbl %>%
+  tab_footnote(
+    footnote = "St Trinian's School.",
+    locations = cells_body(columns = gender, rows = 1:2)
+  )
+
+gt_tbl
+
+
+```
+
+# Row headers
+
+First I create a small tibble to work on.
+
+Then I use gt() as usual to create the table and then pass it through the tab_style() function to correct the default alignment.
+
+```{r}
+maths_tbl <- df %>% 
+  select(surname,maths)
+  tibble(
+    name = (df),
+    maths = df$maths
+  ) %>%
+  arrange(desc(maths))
+  
+maths_tbl <- slice(maths_tbl,1:7)
+
+gt_tbl <-
+  maths_tbl %>% 
+  arrange(desc(maths)) %>% 
+  gt(rowname_col = "surname") %>% 
+ tab_style(
+    style = list(
+      cell_text(align = "left")
+    ),
+    locations = cells_stub(rows = TRUE)
+    )
+
+# Show the gt table
+
+gt_tbl
+
+```
+
+# gtextras()
+
+## Highlight by top values
+
+```{r}
+library(gtExtras)
+library(tidyverse)
+df <- read_csv("https://www.ucl.ac.uk/~ccaajim/results.csv")
+dfx <- df %>% 
+  mutate(avxm = round((maths + history + english)/3)) %>% 
+  mutate(gender = factor(gender, labels = c("Female Student", "Male Student"))) 
+# %>% 
+#   mutate(teacher = factor(teacher))
+gt_tbl <- head(dfx) %>% 
+  gt()
+
+gt_tbl = gt_tbl %>% 
+ gt_hulk_col_numeric(avxm, trim = TRUE) %>% 
+gt_color_rows(english:history)
+ 
+gt_tbl
+
+```
+
+## Hightlight by grouping factor
+
+```{r}
+library(gtExtras)
+gt_tbl = gt_tbl %>% 
+ gt_hulk_col_numeric(avxm, trim = TRUE) %>%
+gt_color_rows(maths:history) %>%
+gt_color_rows(
+    teacher, type = "discrete",
+    palette = "ggthemes::colorblind",
+    domain = range(df$teacher)
+   )
+
+gt_tbl
+
+```
+
+## Sparklines by grouped data
+
+```{r}
+dfspark <- read_csv("https://www.ucl.ac.uk/~ccaajim/results.csv")
+gt_sparkline_tab <- dfspark %>%
+   dplyr::group_by(teacher) %>%
+   # must end up with list of data for each row in the input dataframe
+   dplyr::summarize(score_data = list(maths), .groups = "drop") %>%
+   gt() %>%
+   gt_sparkline(score_data)
+
+gt_sparkline_tab
+```
+
+# Adding summary rows
+
+```{r}
+#library(tidyverse)
+fns_labels <- 
+  list(
+    avg = ~mean(., na.rm = TRUE),
+    total = ~sum(., na.rm = TRUE),
+    s.d. = ~sd(., na.rm = TRUE)
+  )
+df <- read_csv("https://www.ucl.ac.uk/~ccaajim/results.csv")
+df %>% 
+  mutate(avxm = round((maths + history + english)/3)) %>% 
+  mutate(gender = factor(gender, labels = c("Female Student", "Male Student"))) %>% 
+  mutate(teacher = factor(teacher)) %>% 
+  select(-c(maths,english,history)) %>%
+  gt(rowname_col = "surname", groupname_col = "teacher") %>%
+  # fmt_missing(columns = everything()) %>% 
+    summary_rows(
+    groups = TRUE,
+    columns = avxm,
+    fns = list(
+      average = "mean",
+      total = "sum",
+      SD = "sd")
+  ) %>% 
+  grand_summary_rows(
+    columns = c(avxm),
+    fns = fns_labels
+  )
+```
+
+## gtsummary()
+
+
+
+# <https://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html>
+
+# <https://www.danieldsjoberg.com/gtsummary/>
+
+# <https://rfortherestofus.com/2019/11/how-to-make-beautiful-tables-in-r/>

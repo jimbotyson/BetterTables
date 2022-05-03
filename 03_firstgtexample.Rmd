@@ -1,0 +1,31 @@
+# A minimal gt() example
+
+Just as with plots created with **ggplot2()**, it is useful to create tables with **gt()** incrementally (and of course to comment your code).
+
+We first grab and wrangle some data and then create  a simple table.
+
+```{r}
+# libraries
+
+library(tidyverse)
+library(gt)
+
+# flush environment
+
+rm(list = ls())
+
+# read some data
+
+df <- read_csv("https://www.ucl.ac.uk/~ccaajim/results.csv")
+
+df <- df %>% 
+  mutate(avxm = round((maths+english+history)/3))
+
+
+gt_tbl <- df %>%
+  head(5) %>% 
+  gt(caption="This is a table!")
+
+# Show the gt Table
+gt_tbl
+```
